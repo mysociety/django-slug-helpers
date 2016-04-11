@@ -3,6 +3,7 @@ from django.shortcuts import redirect
 
 from .models import SlugRedirect
 
+
 def get_slug_redirect(model, slug):
     try:
         sr = SlugRedirect.objects.get(

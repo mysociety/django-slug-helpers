@@ -4,6 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from django.apps import apps
 
+
 # This is based on
 # https://github.com/dracos/Theatricalia/blob/master/merged/models.py
 # but adapted for redirecting from an old slug rather than ID.
@@ -21,14 +22,15 @@ class SlugRedirect(models.Model):
     new_object_id = models.PositiveIntegerField()
     new_object = GenericForeignKey('content_type', 'new_object_id')
 
-    created = models.DateTimeField( auto_now_add=True )
-    updated = models.DateTimeField( auto_now=True )
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return u'slug "%s" -> %s' % (self.old_object_slug, self.new_object)
 
     class Meta:
         unique_together = ("content_type", "old_object_slug")
+
 
 # This is a validator you can use on any model's slug field to check
 # that its slug isn't already being redirected. To use it you should
